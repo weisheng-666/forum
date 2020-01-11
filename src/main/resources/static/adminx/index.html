@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>后台管理页面</title>
+<link rel="stylesheet" href="../layuiadmin/layui/css/layui.css">
+<link rel="stylesheet" href="../layuiadmin/style/admin.css">
+</head>
+<div class="layui-layout layui-layout-admin">
+	<div class="layui-side layui-side-menu">
+		<div class="layui-side-scroll">
+			<ul class="layui-nav layui-nav-tree" lay-shrink="all" style="margin-top:0px;">
+				<li class="layui-nav-item layui-this">
+	              	<a href="./home/index.html">
+	              		<i class="layui-icon layui-icon-home"></i>
+						<cite>菜单一</cite>
+				  	</a>
+	            </li>
+				<li class="layui-nav-item">
+	              	<a href="javascript:;">
+	              		<i class="layui-icon layui-icon-home"></i>
+						<cite>菜单二</cite>
+						<span class="layui-nav-more"></span>
+				  	</a>
+				  	<dl class="layui-nav-child">
+						<dd><a href="./study/table.html" target="iframe">表格</a></dd>
+						<dd><a href="./study/form.html" target="iframe">表单</a></dd>
+						<dd><a href="./study/button.html" target="iframe">按钮</a></dd>
+					</dl>
+	            </li>
+			</ul>
+		</div>
+	</div>
+	<!-- 主体内容 -->
+	<div class="layui-body" style="top:0px;">
+		<div class="layadmin-tabsbody-item layui-show">
+			<iframe src="./home/index.html" frameborder="0" class="layadmin-iframe" id="iframe" name="iframe"></iframe>
+		</div>
+	</div>
+	<!-- 辅助元素，一般用于移动设备下遮罩 -->
+	<div class="layadmin-body-shade" layadmin-event="shade"></div>
+</div>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../layuiadmin/layui/layui.js"></script>
+<script>
+layui.config({
+	base: '../layuiadmin/' //静态资源所在路径
+}).extend({
+    index: 'lib/index' //主入口模块
+}).use(['index'], function(){
+	$(".layui-nav a").click(function(e){
+		if(this.href == "javascript:;") return;
+		$("iframe").attr("src", this.href);
+		e.preventDefault();
+		return false;
+	});
+});
+</script>
+</body>
+</html>
