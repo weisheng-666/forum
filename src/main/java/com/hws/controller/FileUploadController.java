@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hws.service.impl.FileService;
 
 @RestController
-//@RequestMapping("upload")
+@RequestMapping("upload")
 @CrossOrigin
 public class FileUploadController {
 	
@@ -25,7 +25,7 @@ public class FileUploadController {
         fileService.upload(name, md5,file);        
     }
     
-    @PostMapping("BigFile")
+    @PostMapping("bigFile")
     public void upload(String name,String md5,Long size, Integer chunks,Integer chunk,MultipartFile file) throws IOException {
         if (chunks != null && chunks != 0) {
             fileService.uploadWithBlock(name, md5,size,chunks,chunk,file);
