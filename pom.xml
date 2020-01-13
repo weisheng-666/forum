@@ -48,6 +48,16 @@
        		<groupId>org.apache.commons</groupId>
        		<artifactId>commons-pool2</artifactId>
    		</dependency>
+   		<dependency>
+			<groupId>com.github.kischang</groupId>
+			<artifactId>fastdfs-client</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 	</dependencies>
 	<!-- Package as an executable jar -->
 	<build>
