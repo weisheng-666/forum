@@ -18,11 +18,11 @@ import static com.hws.utils.UploadUtils.*;
 /**
  * 文件上传服务
  */
-@Service
-public class FileService implements IFileService {
+@Service("fileService")
+public class FileServiceImpl implements IFileService {
+	
     @Autowired
     private FileMapper fileDao;
-
 
     /**
      * 上传文件

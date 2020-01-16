@@ -16,11 +16,10 @@ public class TestController {
 	@Autowired
 	private IUserService userService;
 	
-	@RequestMapping("test")
-	public ResultModel test() {
-		System.out.println("test");
-		ResultModel rm = new ResultModel(0,"",userService.findOne());
-		return rm;
-	}
+	/*
+	 * @RequestMapping("test") public ResultModel test() {
+	 * System.out.println("test"); ResultModel rm = new
+	 * ResultModel(0,"",userService.login()); return rm; }
+	 */
 
 }

@@ -44,8 +44,7 @@ public class RedisTokenManager implements TokenManager {
     }
 
     public TokenModel checkToken(String token) {
-    	//TokenModel model = new TokenModel(1L, "1", "admin");
-    	//createToken(model);
+    	
     	if(token == null || token.length() == 0) {
         	return null;
         }
@@ -66,7 +65,7 @@ public class RedisTokenManager implements TokenManager {
         return new TokenModel(userId, token,role); 
     }
 
-    public void deleteToken(String openid, String token) {
+    public void deleteToken( String token) {
     	redisTemplate.delete(token);
     }
 }

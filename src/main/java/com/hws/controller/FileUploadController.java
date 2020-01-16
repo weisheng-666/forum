@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hws.service.impl.FileService;
+import com.hws.service.IFileService;
+import com.hws.service.impl.FileServiceImpl;
 
 @RestController
 @RequestMapping("upload")
@@ -18,7 +19,7 @@ import com.hws.service.impl.FileService;
 public class FileUploadController {
 	
     @Autowired
-    private FileService fileService;
+    private IFileService fileService;
 
     @PostMapping("file")
     public void upload(String name,String md5,MultipartFile file) throws IOException {

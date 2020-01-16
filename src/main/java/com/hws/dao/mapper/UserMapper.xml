@@ -4,10 +4,25 @@
 <mapper namespace="com.hws.dao.UserMapper">
     <resultMap id="BaseResultMap" type="com.hws.domain.User">
         <id column="ID" jdbcType="BIGINT" property="id" />
-        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="USERNAE" jdbcType="VARCHAR" property="username" />
+        <result column="SALT" jdbcType="VARCHAR" property="salt" />
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+        <result column="ROLE" jdbcType="VARCHAR" property="role" />
+        <result column="MONEY" jdbcType="INTEGER" property="money" />
+        <result column="JOIN_DAY" jdbcType="INTEGER" property="joinDay" />
     </resultMap>
  
-    <select id="findOne" resultMap="BaseResultMap">
-        select * from user limit 0,1
+  
+     <select id="findOne" resultMap="BaseResultMap">
+        select * from user where username = #{username} limit 0,1 
     </select>
+    
+    <insert id="insert" parameterType="com.hws.domain.User" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+        insert into user(username,salt,password) values(#{username},#{salt},#{password})
+    </insert>
+    
+    <update id="updateJoinDay">
+    	update user set join_day = join_day+1
+    </update>
+    
 </mapper>

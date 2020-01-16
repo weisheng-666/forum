@@ -27,6 +27,6 @@ public interface TokenManager {
      * 清除token
      * @param userId 登录用户的id
      */
-    public void deleteToken(String openid, String token);
+    public void deleteToken(String token);
 
 }

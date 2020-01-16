@@ -50,8 +50,16 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         	System.out.println(authorization);
         	System.out.println("-------------------------------");
             TokenModel model = tokenManager.checkToken(authorization);
+            boolean flag = true;
+            if(model!=null) {
+	            for(String str:auth.role()) {
+	            	if(str.equals(model.getRole())) {
+	            		flag=false;
+	            	}	            		
+	            }
+            }
             //如果验证token失败，并且方法注明了Authorization，或者注明的角色与token中角色不符合，返回401错误
-            if(model==null || (auth.role().length>0 && !Arrays.asList(auth.role()).contains(model.getRole()))) {
+            if(flag) {
             	 System.out.println("用户未登录");
             	throw new UserNotLoginException();
             }
