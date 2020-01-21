@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css">
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="body" id="app">
+	<div class="layui-form">
+		<div class="layui-form-item">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-inline">
+				<input type="text" name="name" lay-verify="required" placeholder="请输入姓名" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">身份证号</label>
+			<div class="layui-input-block">
+				<input type="text" name="idNumber" lay-verify="required" placeholder="请输入身份证" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">性别</label>
+				<div class="layui-input-block">
+					<select name="sex">
+						<option value=""></option>
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+				</div>
+			</div>
+        </div>
+        <div class="layui-form-item">
+			<label class="layui-form-label">出生日期</label>
+			<div class="layui-inline">
+				<input type="text" name="birthday" id="test1" placeholder="yyyy-mm-dd" lay-verify="required" class="layui-input">
+			</div>
+        </div>
+    
+        <div class="layui-form-item">
+			<label class="layui-form-label">电话号码</label>
+			<div class="layui-input-block">
+				<input type="text" name="phone" lay-verify="required" placeholder="请输入电话号码" class="layui-input">
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<!-- <button class="layui-btn layui-btn-primary" v-on:click="closeWin()">取消</button> -->
+				<button class="layui-btn" lay-submit lay-filter="submit">提交</button>
+			</div>
+        </div>
+	</div>
+</div>
+<script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../layuiadmin/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/vue.js"></script>
+<script type="text/javascript">
+var app = new Vue({
+	el: '#app',
+	data: {
+	},
+	methods: {
+		closeWin: function() {
+    		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+    		parent.layer.close(index);
+    	},
+	},
+	updated: function(){
+		layui.form.render();
+	},
+});
+</script>
+<script>
+layui.config({
+	base: '../../layuiadmin/' //静态资源所在路径
+}).extend({
+    index: 'lib/index' //主入口模块
+}).use(['index','form'], function(){
+	let form = layui.form;
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        $(this).removeAttr("lay-key");
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+            ,trigger : 'click'
+        });
+    });
+
+	form.on('submit(submit)', function(data){
+        var field = data.field;
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8080/ssm/patient/add",
+			data: field,
+			dataType: "json",
+			success: function(res){
+				layer.msg("保存成功",{icon:1,time:1500},function(){
+					var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+					parent.layer.close(index); //再执行关闭   
+				});
+			},
+			error:function(res){
+				layer.msg("保存失败",{icon:2,time:1500});
+			}
+		}); 
+
+  	});
+});
+</script>
+</body>
+</html>

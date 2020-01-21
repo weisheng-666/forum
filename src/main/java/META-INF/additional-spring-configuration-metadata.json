@@ -1,5 +1,27 @@
-{"properties": [{
-  "name": "up",
-  "type": "java.lang.String",
-  "description": "A description for 'up'"
-}]}
+{"properties": [
+  {
+    "name": "up",
+    "type": "java.lang.String",
+    "description": "A description for 'up'"
+  },
+  {
+    "name": "spring.datasource.max-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.max-idle'"
+  },
+  {
+    "name": "spring.datasource.min-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.min-idle'"
+  },
+  {
+    "name": "spring.datasource.inital-size",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.inital-size'"
+  },
+  {
+    "name": "spring.datasource.max-wait",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.max-wait'"
+  }
+]}

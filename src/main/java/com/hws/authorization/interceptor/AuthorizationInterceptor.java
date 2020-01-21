@@ -43,9 +43,9 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         Method method = handlerMethod.getMethod();
         Class<?> clazz = handlerMethod.getBean().getClass();
         Authorization auth = clazz.getAnnotation(Authorization.class);
-        auth = method.getAnnotation(Authorization.class);
+        if(auth==null)auth = method.getAnnotation(Authorization.class);
         if(auth!=null) {
-        	String authorization = request.getHeader(Constants.AUTHORIZATION);
+        	String authorization = request.getHeader("token");
         	System.out.println("-------------------------------");
         	System.out.println(authorization);
         	System.out.println("-------------------------------");
@@ -60,10 +60,10 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             }
             //如果验证token失败，并且方法注明了Authorization，或者注明的角色与token中角色不符合，返回401错误
             if(flag) {
-            	 System.out.println("用户未登录");
+            	System.out.println("用户未登录");
             	throw new UserNotLoginException();
             }
-        	request.setAttribute(Constants.CURRENT_TOKEN_MODEL, model);
+        	request.setAttribute(Constants.CURRENT_USER_ID, model.getUserId());
         }
         return true;
     }

@@ -10,11 +10,29 @@
         <result column="ROLE" jdbcType="VARCHAR" property="role" />
         <result column="MONEY" jdbcType="INTEGER" property="money" />
         <result column="JOIN_DAY" jdbcType="INTEGER" property="joinDay" />
+        <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
     </resultMap>
  
-  
-     <select id="findOne" resultMap="BaseResultMap">
+    <select id="findOne" resultMap="BaseResultMap">
         select * from user where username = #{username} limit 0,1 
+    </select>
+    
+     <select id="findById" resultMap="BaseResultMap">
+        select * from user where id = #{userId}
+    </select>
+    
+    <select id="findAll" resultMap="BaseResultMap">
+    	select * from user 
+    </select>
+    
+    <select id="count" resultType="long">
+    	select count(*) from user
+    </select>
+    
+     <select id="countNum" resultType="String">
+	    SELECT count(*) count FROM user WHERE date_sub(curdate(), INTERVAL 7 DAY) &lt;  date(date)
+		GROUP BY DATE_FORMAT(date,'%Y-%m-%d')
+		ORDER BY date ASC
     </select>
     
     <insert id="insert" parameterType="com.hws.domain.User" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
@@ -25,4 +43,5 @@
     	update user set join_day = join_day+1
     </update>
     
+
 </mapper>

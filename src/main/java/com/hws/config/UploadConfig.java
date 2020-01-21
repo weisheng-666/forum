@@ -1,5 +1,7 @@
 package com.hws.config;
 
+import java.io.File;
+
 import javax.servlet.MultipartConfigElement;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,5 +17,7 @@ public class UploadConfig {
     @Value("${spring.servlet.multipart.location}")
     public void setPath(String path) {
         UploadConfig.path = path;
+        File fileDir = new File(path);
+        if(!fileDir.exists())fileDir.mkdirs();
     }
 }

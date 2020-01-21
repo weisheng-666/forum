@@ -7,7 +7,7 @@ package com.hws.config;
  */
 public class Constants{
     
-    public static final String CURRENT_TOKEN_MODEL = "CURRENT_TOKEN_MODEL";
+	public static final String CURRENT_USER_ID = "CURRENT_USER_ID";
     /**
      * token有效期（小时）
      */
@@ -17,5 +17,7 @@ public class Constants{
      * 存放Authorization的header字段
      */
     public static final String AUTHORIZATION = "authorization";
+    
+    public static final int COUNT_NUM_DAY = 7;
 
 }

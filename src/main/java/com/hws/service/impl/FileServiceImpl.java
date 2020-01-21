@@ -2,6 +2,7 @@ package com.hws.service.impl;
 
 import com.hws.config.UploadConfig;
 import com.hws.dao.FileMapper;
+import com.hws.exception.BusinessException;
 import com.hws.model.File;
 import com.hws.service.IFileService;
 import com.hws.utils.FileUtils;
@@ -31,11 +32,20 @@ public class FileServiceImpl implements IFileService {
      */
     public void upload(String name,
                        String md5,
-                       MultipartFile file) throws IOException {
-        String path = UploadConfig.path +generateFileName()+file.getOriginalFilename();
-        System.out.println(path);
-        FileUtils.write(path, file.getInputStream());
-        fileDao.save(new File(name, md5, path, new Date()));
+                       MultipartFile file) {
+    	//try {
+	        String path = UploadConfig.path +generateFileName()+file.getOriginalFilename();
+	        System.out.println("存储路径:"+path);
+	        try {
+				FileUtils.write(path, file.getInputStream());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        fileDao.save(new File(name, md5, path, new Date()));
+    	//}catch (Exception e) {
+		//	throw new BusinessException();
+		//}
     }
 
     /**
@@ -54,6 +64,7 @@ public class FileServiceImpl implements IFileService {
                                 Integer chunk,
                                 MultipartFile file) throws IOException {
         String fileName = getFileName(md5, chunks);
+        System.out.println("存储路径:"+fileName);
         FileUtils.writeWithBlok(UploadConfig.path + fileName, size, file.getInputStream(), file.getSize(), chunks, chunk);
         addChunk(md5,chunk);
         if (isUploaded(md5)) {
@@ -72,4 +83,19 @@ public class FileServiceImpl implements IFileService {
         file.setMd5(md5);
         return fileDao.getByFile(file) == null;
     }
+
+	@Override
+	public void upload(long id, MultipartFile file) {
+		try {
+			String type = file.getOriginalFilename();
+			
+	        String path = UploadConfig.path +"head/"+id+ type.substring(type.lastIndexOf("."));
+	       
+	        System.out.println(path);
+	        FileUtils.write(path, file.getInputStream());
+    	}catch (Exception e) {
+			throw new BusinessException();
+		}
+		
+	}
 }

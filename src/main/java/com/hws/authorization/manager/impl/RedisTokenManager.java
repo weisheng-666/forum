@@ -39,8 +39,7 @@ public class RedisTokenManager implements TokenManager {
     	if(token != null) {
     		redisTemplate.delete(token);
     	}
-    	redisTemplate.boundValueOps(model.getToken()).set(model.getUserId()+"###"+model.getRole());
-    	
+    	redisTemplate.opsForValue().set(model.getToken(),model.getUserId()+"###"+model.getRole(), Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
     }
 
     public TokenModel checkToken(String token) {

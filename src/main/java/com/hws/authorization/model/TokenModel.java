@@ -36,6 +36,11 @@ public class TokenModel {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	@Override
+	public String toString() {
+		return "TokenModel [userId=" + userId + ", token=" + token + ", role=" + role + "]";
+	}
 	
 	
 }

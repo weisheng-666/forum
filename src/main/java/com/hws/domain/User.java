@@ -14,6 +14,7 @@ public class User {
     private String role;
     private Integer money;
     private Integer joinDay;
+    private String imageUrl;
 	public long getId() {
 		return id;
 	}
@@ -58,10 +59,17 @@ public class User {
 	public void setJoinDay(Integer joinDay) {
 		this.joinDay = joinDay;
 	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", role="
-				+ role + ", money=" + money + ", joinDay=" + joinDay + "]";
+				+ role + ", money=" + money + ", joinDay=" + joinDay + ", imageUrl=" + imageUrl + "]";
 	}
 	
     

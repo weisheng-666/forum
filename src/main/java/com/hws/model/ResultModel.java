@@ -39,8 +39,22 @@ public class ResultModel implements Serializable{
     public Object getData() {
         return data;
     }
+    
+ 
 
-    public ResultModel(int code, String message) {
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
+	}
+
+	public ResultModel(int code, String message) {
         this.code = code;
         this.message = message;
         this.data = "";

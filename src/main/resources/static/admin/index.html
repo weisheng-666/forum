@@ -13,16 +13,28 @@
 				<li class="layui-nav-item layui-this">
 	              	<a href="./home/index.html">
 	              		<i class="layui-icon layui-icon-home"></i>
-						<cite>菜单一</cite>
+						<cite>首页</cite>
 				  	</a>
 	            </li>
 				<li class="layui-nav-item">
 	              	<a href="javascript:;">
 	              		<i class="layui-icon layui-icon-home"></i>
-						<cite>菜单二</cite>
+						<cite>用户管理</cite>
 						<span class="layui-nav-more"></span>
 				  	</a>
 				  	<dl class="layui-nav-child">
+						<dd><a href="./user/table.html" target="iframe">用户信息</a></dd>
+					</dl>
+	            </li>
+	
+				<li class="layui-nav-item">
+	              	<a href="javascript:;">
+	              		<i class="layui-icon layui-icon-home"></i>
+						<cite>帖子管理</cite>
+						<span class="layui-nav-more"></span>
+				  	</a>
+				  	<dl class="layui-nav-child">
+				  		<dd><a href="./home/file.html" target="iframe">文件</a></dd>
 						<dd><a href="./study/table.html" target="iframe">表格</a></dd>
 						<dd><a href="./study/form.html" target="iframe">表单</a></dd>
 						<dd><a href="./study/button.html" target="iframe">按钮</a></dd>
@@ -48,6 +60,11 @@ layui.config({
 }).extend({
     index: 'lib/index' //主入口模块
 }).use(['index'], function(){
+	if(layui.data("temp").userInfo==null){
+		window.location.href="login.html";
+	}else{
+		console.log(layui.data("temp").userInfo);
+	}
 	$(".layui-nav a").click(function(e){
 		if(this.href == "javascript:;") return;
 		$("iframe").attr("src", this.href);
