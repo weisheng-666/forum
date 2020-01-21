@@ -133,16 +133,16 @@ layui.config({
         	})
         }
         else if ("edit" === e.event) {
-        	layui.data("temp",{key:"user",value:e.data});
+        	layui.data("temp",{key:"adminTheme",value:e.data});
         	var index = layer.open({
     			type:2,
     			title: "编辑",
-    			content: 'form.html',
+    			content: 'edit.html',
     			area:["800px","500px"],
     			//btn:["确认","取消"],
     			end:function(){
-    				if(layui.data("temp").user) {
-    					e.update(layui.data("temp").user);
+    				if(layui.data("temp").adminTheme) {
+    					e.update(layui.data("temp").adminTheme);
     					layui.data("temp",null);
     				}
     			}

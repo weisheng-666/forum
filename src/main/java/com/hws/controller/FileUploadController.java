@@ -1,10 +1,14 @@
 package com.hws.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hws.authorization.annotation.CurrentUser;
+import com.hws.config.ResultStatus;
 import com.hws.domain.User;
 import com.hws.domain.dto.UserDto;
+import com.hws.model.ResultModel;
 import com.hws.service.IFileService;
 import com.hws.service.impl.FileServiceImpl;
 
@@ -33,10 +39,14 @@ public class FileUploadController {
     }
 
     @PostMapping("file")//小文件接口
-    public void upload(/*@CurrentUser UserDto user*/String name,String md5,MultipartFile myFile,HttpServletRequest res) {
-    	//System.out.println(user.getId());
-    	name="1";md5="1";
-        fileService.upload(name, md5,myFile);        
+    public  ResultModel upload(/*@CurrentUser UserDto user*/String name,String md5,MultipartFile file,HttpServletRequest res) {
+    	System.out.println(file);
+    	name="1234";md5="1";
+        fileService.upload(name, md5,file);   
+        Map<String, Object> data = new HashMap<>();
+		data.put("src", "../file/7aa4ca8945224c99b0dbe23dbd5157c6p2038068911.jpg");
+        return new ResultModel(0,"成功",data);
+        
     }
     
     @PostMapping("BigFile")//大文件接口

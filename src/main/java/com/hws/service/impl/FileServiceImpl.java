@@ -42,7 +42,9 @@ public class FileServiceImpl implements IFileService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        fileDao.save(new File(name, md5, path, new Date()));
+	        File file1 = new File(name, md5, path, new Date());
+	        System.out.println(file1);
+	        fileDao.save(file1);
     	//}catch (Exception e) {
 		//	throw new BusinessException();
 		//}
